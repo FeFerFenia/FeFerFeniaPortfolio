@@ -80,6 +80,8 @@ em.hl,.hl{font-style:normal;color:var(--accent)}
 .logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(20px,4vw,44px)}
 .logos__item{font-family:var(--display);font-weight:700;font-size:clamp(15px,1.6vw,19px);letter-spacing:-.01em;color:var(--ink-45);opacity:.85}
 .logos__slot{display:flex;align-items:center;justify-content:center;min-width:clamp(120px,15vw,168px);height:clamp(64px,6.5vw,72px)}
+.logos__slot img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;opacity:.85;transition:opacity .18s}
+.logos__slot:hover img{opacity:1}
 
 /* ————— Cards: area of work ————— */
 .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2.6vw,32px)}
