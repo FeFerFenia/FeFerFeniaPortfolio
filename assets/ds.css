@@ -77,11 +77,14 @@ em.hl,.hl{font-style:normal;color:var(--accent)}
 .arrowlink svg{transition:transform .2s}.arrowlink:hover svg{transform:translateX(4px)}
 
 /* ————— Logo row ————— */
-.logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(20px,4vw,44px)}
+.logos{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.logos__track{display:flex;align-items:center;width:max-content;animation:logos-scroll 36s linear infinite}
+.logos__track:hover{animation-play-state:paused}
 .logos__item{font-family:var(--display);font-weight:700;font-size:clamp(15px,1.6vw,19px);letter-spacing:-.01em;color:var(--ink-45);opacity:.85}
-.logos__slot{display:flex;align-items:center;justify-content:center;min-width:clamp(120px,15vw,168px);height:clamp(64px,6.5vw,72px)}
+.logos__slot{display:flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:clamp(120px,15vw,168px);height:clamp(64px,6.5vw,72px);margin-right:clamp(20px,4vw,44px)}
 .logos__slot img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;opacity:.85;transition:opacity .18s}
 .logos__slot:hover img{opacity:1}
+@keyframes logos-scroll{to{transform:translateX(-50%)}}
 
 /* ————— Cards: area of work ————— */
 .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2.6vw,32px)}
