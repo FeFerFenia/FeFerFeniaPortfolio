@@ -114,7 +114,9 @@
     document.querySelectorAll('[data-lang-btn]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-lang-btn') === lang));
     });
-    roles = [d['hero.role.1'], d['hero.role.2']];
+    /* Muestra primero "UX/UI Designer" (hero.role.2) y, tras una única
+       transición, se fija en "Product Designer" (hero.role.1). No rota más. */
+    roles = [d['hero.role.2'], d['hero.role.1']];
     var slot = document.querySelector('[data-rotator-item]');
     if (slot) slot.textContent = roles[roleIdx % roles.length];
   }
@@ -129,30 +131,20 @@
     var slot = document.querySelector('[data-rotator-item]');
     if (!slot || roles.length < 2) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var fade = null;
-    function clear() {
-      if (fade) { clearTimeout(fade); fade = null; }
-      slot.removeAttribute('data-state');
-    }
-    function tick() {
-      if (document.hidden) { clear(); return; }
-      clear();
+    var done = false;
+    function swap() {
+      if (done || document.hidden) return;
+      done = true;
       slot.setAttribute('data-state', 'out');
-      fade = setTimeout(function () {
-        fade = null;
-        roleIdx = (roleIdx + 1) % roles.length;
+      setTimeout(function () {
+        roleIdx = 1;
         slot.textContent = roles[roleIdx];
         slot.removeAttribute('data-state');
       }, 450);
     }
-    timer = setInterval(tick, 2800);
+    timer = setTimeout(swap, 2800);
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        clear();
-        if (timer) { clearInterval(timer); timer = null; }
-      } else if (!timer) {
-        timer = setInterval(tick, 2800);
-      }
+      if (!done && !document.hidden) swap();
     });
   }
 
